@@ -1,0 +1,36 @@
+Visualforce Page
+<apex:page standardStylesheets="false" showHeader="false" controller="CustomerDetails" renderAs="pdf">
+    
+    <div style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
+        <h2>Order Details</h2>   
+        
+        <table style="border-collapse: collapse;width: 100%;">
+            <tr style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
+                <th>Customer Name</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Total Price</th>
+            </tr> 
+            <apex:repeat value="{!productList}" var="detail">
+                <tr style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
+                    <td >{!detail.Customer_Name__c}</td>
+                    <td >{!detail.Product_Name__c}</td>
+                    <td >{!detail.Product_Price__c}</td>
+                    <td >{!detail.Total_Cost__c}</td>     
+                </tr>
+            </apex:repeat>    
+        </table>  
+    </div>
+</apex:page>
+
+
+
+Class
+public class CustomerDetails {
+    public List<Delivery__c> productList{get;set;}
+     public CustomerDetails() {
+        productList = [Select id,Customer_Name__c,Product_Name__c,Product_Price__c, Total_Cost__c from Delivery__c];
+    }   
+}
+
+
