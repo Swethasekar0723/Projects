@@ -1,19 +1,25 @@
 Visualforce Page
 <apex:page standardStylesheets="false" showHeader="false" controller="CustomerDetails" renderAs="pdf">
     
-    <div style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
+    <div >
         <h2>Order Details</h2>   
         
-        <table style="border-collapse: collapse;width: 100%;">
-            <tr style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
+        <table >
+            <tr >
                 <th>Customer Name</th>
+                <th>Mobile Number</th>
+                <th>Street</th>
+                <th>City</th>
                 <th>Product Name</th>
                 <th>Product Price</th>
                 <th>Total Price</th>
             </tr> 
             <apex:repeat value="{!productList}" var="detail">
-                <tr style="padding: 8px;text-align: left;border-bottom: 1px solid #ddd;">
+                <tr >
                     <td >{!detail.Customer_Name__c}</td>
+                    <td >{!detail.Phone}</td>
+                    <td >{!detail.Street__c}</td>
+                    <td >{!detail.City__c}</td>
                     <td >{!detail.Product_Name__c}</td>
                     <td >{!detail.Product_Price__c}</td>
                     <td >{!detail.Total_Cost__c}</td>     
@@ -29,7 +35,7 @@ Class
 public class CustomerDetails {
     public List<Delivery__c> productList{get;set;}
      public CustomerDetails() {
-        productList = [Select id,Customer_Name__c,Product_Name__c,Product_Price__c, Total_Cost__c from Delivery__c];
+        productList = [Select id,Customer_Name__c,Phone,Street__c,City__c,Product_Name__c,Product_Price__c, Total_Cost__c from Delivery__c];
     }   
 }
 
