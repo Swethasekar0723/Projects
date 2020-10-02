@@ -1,0 +1,43 @@
+HTML
+<template>
+    <lightning-record-form
+        object-api-name="Customer__c"
+        fields={fields}
+        onsuccess={handleSuccess}
+    >
+    </lightning-record-form>
+</template>
+
+JS
+import { LightningElement, api } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import NAME_FIELD from '@salesforce/schema/Customer__c.Name';
+import PHONE_FIELD from '@salesforce/schema/Customer__c.Phone__c';
+import EMAIL_FIELD from '@salesforce/schema/Customer__c.Email__c';
+export default class LightningRecordFormCreateExampleLWC extends LightningElement {
+    // objectApiName is "Account" when this component is placed on an account record page
+    @api objectApiName;
+    fields = [NAME_FIELD, PHONE_FIELD, EMAIL_FIELD];
+    handleSuccess(event) {
+        const evt = new ShowToastEvent({
+            title: 'Account created',
+            message: 'Record ID: ' + event.detail.id,
+            variant: 'success'
+        });
+        this.dispatchEvent(evt);
+    }
+}
+
+
+XML
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="logisticsLWC" >
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+<targets>
+    <target>lightning__AppPage</target>
+    <target>lightning__RecordPage</target>
+    <target>lightning__HomePage</target>
+</targets>
+</LightningComponentBundle>
+
